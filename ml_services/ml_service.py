@@ -10,9 +10,9 @@ print(">>> STARTING ML SERVICE <<<")
 model = joblib.load("water_quality_model.pkl")
 
 def wqi_label(wqi):
-    if wqi >= 75:
+    if wqi >= 8:
         return "Good"
-    elif wqi >= 50:
+    elif wqi >= 5:
         return "Moderate"
     else:
         return "Poor"

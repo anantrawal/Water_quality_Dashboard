@@ -17,21 +17,26 @@ public class PredictionController {
     }
 
     @PostMapping("/predict")
-    public PredictionResponse predict() {
+    public PredictionResponse predict(@RequestBody(required = false) PredictionRequest req) {
 
-        PredictionRequest req = new PredictionRequest();
-        req.temperature = 26;
-        req.turbidity = 5;
-        req.ph = 7.2;
-        req.doValue = 6.8;
-        req.bod = 3.1;
-        req.cod = 18;
-        req.nitrate = 2.4;
-        req.phosphate = 0.5;
-        req.tds = 320;
-        req.conductivity = 480;
-        req.fecal_coliform = 45;
+        // If frontend sends nothing, use default values
+        if (req == null) {
+            req = new PredictionRequest();
+            req.temperature = 26;
+            req.turbidity = 5;
+            req.ph = 7.2;
+            req.doValue = 6.8;
+            req.bod = 3.1;
+            req.cod = 18;
+            req.nitrate = 2.4;
+            req.phosphate = 0.5;
+            req.tds = 320;
+            req.conductivity = 480;
+            req.fecal_coliform = 45;
+        }
 
         return mlService.predict(req);
     }
+
 }
+
